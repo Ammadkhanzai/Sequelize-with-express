@@ -1,28 +1,15 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require('cors');
-// const connectDB = require("./config/db");
-// const auth = require('./middleware/auth.js');
 const cookieParser = require('cookie-parser')
-// const jwt = require("jsonwebtoken");
 const path = require('path');
 
 // Load .env vars
 dotenv.config({ path: "./config/config.env" });
 
-// Connect to database
-// connectDB();
+// const {dbConnect} = require("./config/databseConnection")
 
-// Importing Routers
-// const loginRoute = require("./routes/login");
-// const usersRoute = require("./routes/users");
-// const categoriesRouter = require("./routes/categories");
-// const softwareManagementRouter = require('./routes/software-management.js');
-// const latestSoftwareRouter = require('./routes/latest-software.js');
-// const populorSoftwareRouter = require('./routes/populor-software.js');
-// const infoPageRouter = require('./routes/info-page.js');
-// const statisticRouter = require('./routes/statistic.js');
-// const sendmail = require('./routes/sendmail.js');
+// dbConnect();
 
 // App config
 const app = express();
@@ -33,17 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
 // app.use('/uploads', express.static('uploads'));
 
-
+const userRoutes = require("./routes/user.routes");
 // Routing URLS
-// app.use("/api/login", loginRoute);
-// app.use("/api/users", usersRoute);
-// app.use("/api/category", categoriesRouter);
-// app.use("/api/software-management", softwareManagementRouter);
-// app.use("/api/latest-software", latestSoftwareRouter);
-// app.use("/api/popular-software", populorSoftwareRouter);
-// app.use("/api/info-page", infoPageRouter);
-// app.use("/api/statistic", statisticRouter);
-// app.use("/api/sendmail", sendmail);
+app.use("/api/user", userRoutes);
 
 app.use((req, res, next) => {
   const error = new Error('Exception Handled');
